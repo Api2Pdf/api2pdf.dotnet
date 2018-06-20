@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Api2Pdf</PackageId>
+    <Authors>Api2Pdf</Authors>
+    <Company>Api2Pdf</Company>
+    <Product>Api2Pdf</Product>
+    <PackageLicenseUrl>https://github.com/Api2Pdf/api2pdf.dotnet/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Api2Pdf/api2pdf.dotnet/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Api2Pdf/api2pdf.dotnet/</RepositoryUrl>
+    <PackageTags>pdf wkhtmtopdf headless chrome libreoffice</PackageTags>
+    <Description>Wrapper for Api2Pdf.com - instantly generate PDFs from HTML, URLs or office documents.  Also includes support for merge.  Wrapper around wkhtmltopdf, headless chrome, and libre office.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+  </ItemGroup>
+
+</Project>
