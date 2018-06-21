@@ -1,5 +1,5 @@
 # api2pdf.dotnet
-.NET bindings for [Api2pdf REST API](https://www.api2pdf.com/documentation) 
+.NET bindings for [Api2Pdf REST API](https://www.api2pdf.com/documentation) 
 
 Api2Pdf.com is a REST API for instantly generating PDF documents from HTML, URLs, Microsoft Office Documents (Word, Excel, PPT), and images. The API also supports merge / concatenation of two or more PDFs. Api2Pdf is a wrapper for popular libraries such as **wkhtmltopdf**, **Headless Chrome**, and **LibreOffice**.
 
