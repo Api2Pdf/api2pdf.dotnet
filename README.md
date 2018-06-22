@@ -69,16 +69,15 @@ An `Api2PdfResponse` object is returned from every API call. If a call is unsucc
     
 **Convert HTML to PDF (load PDF in browser window and specify a file name)**
 
-    var apiResponse = a2pClient.WkHtmlToPdf.FromHtml("<p>Hello, World</p>", inline=true, outputFileName="test.pdf");
+    var apiResponse = a2pClient.WkHtmlToPdf.FromHtml("<p>Hello, World</p>", inline: true, outputFileName: "test.pdf");
     
-**Convert HTML to PDF (use keyword arguments for advanced wkhtmltopdf settings)**
+**Convert HTML to PDF (use dictionary for advanced wkhtmltopdf settings)**
 [View full list of wkhtmltopdf options available.](https://www.api2pdf.com/documentation/advanced-options-wkhtmltopdf/)
 
-    options = {
-        'orientation': 'landscape',
-        'pageSize': 'A4'
-    }
-    var apiResponse = a2pClient.WkHtmlToPdf.FromHtml("<p>Hello, World</p>", **options);
+    var options = new Dictionary<string, string>();
+    options.Add("orientation", "landscape");
+    options.Add("pageSize", "Letter");
+    var apiResponse = a2pClient.WkHtmlToPdf.FromHtml("<p>Hello, World</p>", options: options);
 
 **Convert URL to PDF**
 
@@ -86,16 +85,15 @@ An `Api2PdfResponse` object is returned from every API call. If a call is unsucc
     
 **Convert URL to PDF (load PDF in browser window and specify a file name)**
 
-    var apiResponse = a2pClient.WkHtmlToPdf.FromUrl("http://www.api2pdf.com", inline=true, outputFileName="test.pdf");
+    var apiResponse = a2pClient.WkHtmlToPdf.FromUrl("http://www.api2pdf.com", inline: true, outputFileName: "test.pdf");
     
 **Convert URL to PDF (use keyword arguments for advanced wkhtmltopdf settings)**
 [View full list of wkhtmltopdf options available.](https://www.api2pdf.com/documentation/advanced-options-wkhtmltopdf/)
 
-    options = {
-        'orientation': 'landscape',
-        'pageSize': 'A4'
-    }
-    var apiResponse = a2pClient.WkHtmlToPdf.FromUrl("http://www.api2pdf.com", **options);
+    var options = new Dictionary<string, string>();
+    options.Add("orientation", "landscape");
+    options.Add("pageSize", "Letter");
+    var apiResponse = a2pClient.WkHtmlToPdf.FromUrl("http://www.api2pdf.com", options: options);
 
 
 ---
@@ -108,16 +106,15 @@ An `Api2PdfResponse` object is returned from every API call. If a call is unsucc
     
 **Convert HTML to PDF (load PDF in browser window and specify a file name)**
 
-    var apiResponse = a2pClient.HeadlessChrome.FromHtml("<p>Hello, World</p>", inline=true, outputFileName="test.pdf");
+    var apiResponse = a2pClient.HeadlessChrome.FromHtml("<p>Hello, World</p>", inline: true, outputFileName: "test.pdf");
     
 **Convert HTML to PDF (use keyword arguments for advanced Headless Chrome settings)**
 [View full list of Headless Chrome options available.](https://www.api2pdf.com/documentation/advanced-options-headless-chrome/)
 
-    options = {
-        'orientation': 'landscape',
-        'pageSize': 'A4'
-    }
-    var apiResponse = a2pClient.HeadlessChrome.FromHtml("<p>Hello, World</p>", **options);
+    var options = new Dictionary<string, string>();
+    options.Add("orientation", "landscape");
+    options.Add("pageSize", "Letter");
+    var apiResponse = a2pClient.HeadlessChrome.FromHtml("<p>Hello, World</p>", options: options);
 
 **Convert URL to PDF**
 
@@ -125,16 +122,15 @@ An `Api2PdfResponse` object is returned from every API call. If a call is unsucc
     
 **Convert URL to PDF (load PDF in browser window and specify a file name)**
 
-    var apiResponse = a2pClient.HeadlessChrome.FromUrl("http://www.api2pdf.com", inline=true, outputFileName="test.pdf");
+    var apiResponse = a2pClient.HeadlessChrome.FromUrl("http://www.api2pdf.com", inline: true, outputFileName: "test.pdf");
     
-**Convert URL to PDF (use keyword arguments for advanced Headless Chrome settings)**
+**Convert URL to PDF (use dictionary for advanced Headless Chrome settings)**
 [View full list of Headless Chrome options available.](https://www.api2pdf.com/documentation/advanced-options-headless-chrome/)
 
-    options = {
-        'orientation': 'landscape',
-        'pageSize': 'A4'
-    }
-    var apiResponse = a2pClient.HeadlessChrome.FromUrl("http://www.api2pdf.com", **options);
+    var options = new Dictionary<string, string>();
+    options.Add("orientation", "landscape");
+    options.Add("pageSize", "Letter");
+    var apiResponse = a2pClient.HeadlessChrome.FromUrl("http://www.api2pdf.com", options: options);
     
 ---
 
@@ -152,7 +148,7 @@ You must provide a url to the file. Our engine will consume the file at that URL
     
 **Convert Microsoft Office Document or Image to PDF (load PDF in browser window and specify a file name)**
 
-    var apiResponse = a2pClient.LibreOffice.Convert("https://www.api2pdf.com/wp-content/themes/api2pdf/assets/samples/sample-word-doc.docx", inline=true, outputFileName="test.pdf");
+    var apiResponse = a2pClient.LibreOffice.Convert("https://www.api2pdf.com/wp-content/themes/api2pdf/assets/samples/sample-word-doc.docx", inline: true, outputFileName: "test.pdf");
     
 ---
     
@@ -168,7 +164,7 @@ To use the merge endpoint, supply a list of urls to existing PDFs. The engine wi
 **Merge PDFs from list of URLs to existing PDFs (load PDF in browser window and specify a file name)**
 
     var links_to_pdfs = new List<string>() {"https://LINK-TO-PDF", "https://LINK-TO-PDF"};
-    var apiResponse = a2pClient.Merge(links_to_pdfs, inline=true, outputFileName="test.pdf");
+    var apiResponse = a2pClient.Merge(links_to_pdfs, inline: true, outputFileName: "test.pdf");
     
 ---
     
@@ -180,7 +176,7 @@ On any `Api2PdfResponse` that succesfully generated a pdf, you can use the handy
 
     var a2pClient = Api2Pdf("YOUR-API-KEY");
     var links_to_pdfs = new List<string>() {"https://LINK-TO-PDF", "https://LINK-TO-PDF"};
-    var apiResponse = a2pClient.Merge(links_to_pdfs, inline=true, outputFileName="test.pdf");
+    var apiResponse = a2pClient.Merge(links_to_pdfs, inline: true, outputFileName: "test.pdf");
     apiResponse.SavePdf("path-to-local-folder");
 
 **byte[] Api2PdfResponse.GetPdfBytes()**
@@ -189,7 +185,7 @@ You can use `GetPdfBytes()` method to download the pdf to a byte array.
 
     var a2pClient = Api2Pdf("YOUR-API-KEY");
     var links_to_pdfs = new List<string>() {"https://LINK-TO-PDF", "https://LINK-TO-PDF"};
-    var apiResponse = a2pClient.Merge(links_to_pdfs, inline=true, outputFileName="test.pdf");
+    var apiResponse = a2pClient.Merge(links_to_pdfs, inline: true, outputFileName: "test.pdf");
     apiResponse.GetPdfBytes();
     
 ---
