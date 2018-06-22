@@ -102,7 +102,7 @@ namespace Api2PdfLibrary
             _apiKey = apiKey;
         }
 
-        public Api2PdfResponse FromHtml(string html, bool inline = false, string outputFileName = null, params KeyValuePair<string, string>[] options)
+        public Api2PdfResponse FromHtml(string html, bool inline = false, string outputFileName = null, Dictionary<string, string> options = null)
         {
             var wkRequest = new WkHtmlToPdfHtmlRequest
             {
@@ -121,7 +121,7 @@ namespace Api2PdfLibrary
             return _httpClient.PostPdfRequest<Api2PdfResponse>($"{API_BASE_URL}/wkhtmltopdf/html", wkRequest);
         }
 
-        public Api2PdfResponse FromUrl(string url, bool inline = false, string outputFileName = null, params KeyValuePair<string, string>[] options)
+        public Api2PdfResponse FromUrl(string url, bool inline = false, string outputFileName = null, Dictionary<string, string> options = null)
         {
             var wkRequest = new WkHtmlToPdfUrlRequest
             {
@@ -149,7 +149,7 @@ namespace Api2PdfLibrary
             _apiKey = apiKey;
         }
 
-        public Api2PdfResponse FromHtml(string html, bool inline = false, string outputFileName = null, params KeyValuePair<string, string>[] options)
+        public Api2PdfResponse FromHtml(string html, bool inline = false, string outputFileName = null, Dictionary<string, string> options = null)
         {
             var chromeRequest = new ChromeHtmlRequest
             {
@@ -168,7 +168,7 @@ namespace Api2PdfLibrary
             return _httpClient.PostPdfRequest<Api2PdfResponse>($"{API_BASE_URL}/chrome/html", chromeRequest);
         }
 
-        public Api2PdfResponse FromUrl(string url, bool inline = false, string outputFileName = null, params KeyValuePair<string, string>[] options)
+        public Api2PdfResponse FromUrl(string url, bool inline = false, string outputFileName = null, Dictionary<string, string> options = null)
         {
             var chromeRequest = new ChromeUrlRequest
             {
