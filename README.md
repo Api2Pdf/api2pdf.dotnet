@@ -87,7 +87,7 @@ An `Api2PdfResponse` object is returned from every API call. If a call is unsucc
 
     var apiResponse = a2pClient.WkHtmlToPdf.FromUrl("http://www.api2pdf.com", inline: true, outputFileName: "test.pdf");
     
-**Convert URL to PDF (use keyword arguments for advanced wkhtmltopdf settings)**
+**Convert URL to PDF (use dictionary for advanced wkhtmltopdf settings)**
 [View full list of wkhtmltopdf options available.](https://www.api2pdf.com/documentation/advanced-options-wkhtmltopdf/)
 
     var options = new Dictionary<string, string>();
@@ -108,7 +108,7 @@ An `Api2PdfResponse` object is returned from every API call. If a call is unsucc
 
     var apiResponse = a2pClient.HeadlessChrome.FromHtml("<p>Hello, World</p>", inline: true, outputFileName: "test.pdf");
     
-**Convert HTML to PDF (use keyword arguments for advanced Headless Chrome settings)**
+**Convert HTML to PDF (use dictionary for advanced Headless Chrome settings)**
 [View full list of Headless Chrome options available.](https://www.api2pdf.com/documentation/advanced-options-headless-chrome/)
 
     var options = new Dictionary<string, string>();
