@@ -43,7 +43,7 @@ All usage starts by initializing the client by passing your API key as a paramet
 
 Once you initialize the client, you can make calls like so:
 
-    var apiResponse = a2pClient.HeadlessChrome.FromHtml('<p>Hello, World</p>');
+    var apiResponse = a2pClient.HeadlessChrome.FromHtml("<p>Hello, World</p>");
     Console.WriteLine(apiResponse.Pdf);
     Console.ReadLine();
     
