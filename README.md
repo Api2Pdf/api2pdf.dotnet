@@ -112,8 +112,7 @@ An `Api2PdfResponse` object is returned from every API call. If a call is unsucc
 [View full list of Headless Chrome options available.](https://www.api2pdf.com/documentation/advanced-options-headless-chrome/)
 
     var options = new Dictionary<string, string>();
-    options.Add("orientation", "landscape");
-    options.Add("pageSize", "Letter");
+    options.Add("landscape", "true");
     var apiResponse = a2pClient.HeadlessChrome.FromHtml("<p>Hello, World</p>", options: options);
 
 **Convert URL to PDF**
@@ -128,8 +127,7 @@ An `Api2PdfResponse` object is returned from every API call. If a call is unsucc
 [View full list of Headless Chrome options available.](https://www.api2pdf.com/documentation/advanced-options-headless-chrome/)
 
     var options = new Dictionary<string, string>();
-    options.Add("orientation", "landscape");
-    options.Add("pageSize", "Letter");
+    options.Add("landscape", "true");
     var apiResponse = a2pClient.HeadlessChrome.FromUrl("http://www.api2pdf.com", options: options);
     
 ---
