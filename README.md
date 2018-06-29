@@ -7,7 +7,7 @@ Api2Pdf.com is a REST API for instantly generating PDF documents from HTML, URLs
 - [Resources](#resources)
 - [Authorization](#authorization)
 - [Usage](#usage)
-- [FAQ](#faq)
+- [FAQ](https://www.api2pdf.com/faq)
 
 
 ## <a name="installation"></a>Add a dependency
@@ -186,25 +186,4 @@ You can use `GetPdfBytes()` method to download the pdf to a byte array.
     var apiResponse = a2pClient.Merge(links_to_pdfs, inline: true, outputFileName: "test.pdf");
     apiResponse.GetPdfBytes();
     
----
-## <a name="faq"></a>FAQ
 
-#### How do you bill?
-$1 will be deducted from your balance every month as long as you maintain an active account. This charge begins 30 days after your first sign up for the service. In addition, we charge $0.001 per megabyte (data in + data out). We require customers to maintain a positive balance on their account to use the service. You can turn off auto-recharge at any time and let your funds run out if you no longer wish to use the service. See our [pricing calculator](https://www.api2pdf.com/pricing/).
-
-#### Do you offer free accounts?
-The average customer spents about $2/month on our product. We do not have free accounts as this time. Feel free to check out alternatives and competitors.
-
-#### Cancellation and refunds
-We do not have any long term contracts. You can leave us at anytime with no further commitments. As our minimum cost is $1.00, we do not provide refunds.
-
-#### Are there any limits?
-Api2Pdf does not set any specific limits on PDF file size, however our system does have processing power limitations. Each PDF request is provided 3 GB of RAM to work with and 90 seconds to generate the PDF. We offer WKHTMLTOPDF, Headless Chrome, and LibreOffice to do conversions. Our platform will have the same limits as those underlying components. If the underlying component fails to convert to PDF, it will also fail via our service. Some examples are:
-
-- Password protected PDFs
-- Encrypted PDFs
-- HTML that references erroneous content
-- Protected Office Documents
-
-#### How long are PDFs stored on Api2Pdf.com?
-After generating a PDF via the API, you are provided with a link to the file. This link will hold the PDF for 24 hours. If you wish to keep your PDF long term, download the file to your local cache.
