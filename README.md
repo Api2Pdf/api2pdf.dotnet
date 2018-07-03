@@ -29,9 +29,8 @@ Resources this API supports:
 ## <a name="authorization"></a>Authorization
 
 ### Acquire API Key
-1. Create an account and login at [portal.api2pdf.com](https://portal.api2pdf.com)
-2. Add a balance to your account (no monthly commitment, sign up with as little as $1)
-3. Create an application and grab your API Key
+
+Create an account at [portal.api2pdf.com](https://portal.api2pdf.com/register) to get your API key.
     
 ## <a name="#usage"></a>Usage
 
