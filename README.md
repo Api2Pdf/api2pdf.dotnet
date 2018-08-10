@@ -38,7 +38,7 @@ Create an account at [portal.api2pdf.com](https://portal.api2pdf.com/register) t
 
 All usage starts by initializing the client by passing your API key as a parameter to the constructor.
 
-    var a2pClient = Api2Pdf("YOUR-API-KEY");
+    var a2pClient = new Api2Pdf("YOUR-API-KEY");
 
 Once you initialize the client, you can make calls like so:
 
