@@ -12,7 +12,7 @@
     <RepositoryUrl>https://github.com/Api2Pdf/api2pdf.dotnet/</RepositoryUrl>
     <PackageTags>pdf wkhtmtopdf headless chrome libreoffice</PackageTags>
     <Description>Wrapper for Api2Pdf.com - instantly generate PDFs from HTML, URLs or office documents.  Also includes support for merge.  Wrapper around wkhtmltopdf, headless chrome, and libre office.</Description>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
