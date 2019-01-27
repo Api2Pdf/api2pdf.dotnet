@@ -167,6 +167,16 @@ To use the merge endpoint, supply a list of urls to existing PDFs. The engine wi
     
 ## <a name="helpers"></a>Helper Methods
 
+**Api2PdfResponse Delete(string responseId)**
+
+By default, Api2Pdf will delete your PDF 24 hours after it has been generated. For those with high security needs, you may want to delete your PDF on command. You can do so by making an DELETE api call with the `responseId` attribute that was returned on the original JSON payload.
+
+    var a2pClient = Api2Pdf("YOUR-API-KEY");
+    var apiResponse = a2pClient.HeadlessChrome.FromHtml("<p>Hello World</p>");
+    var responseId = apiResponse.ResponseId;
+    //delete PDF
+    a2pClient.Delete(responseId);
+
 **void Api2PdfResponse.SavePdf(string localPath)**
 
 On any `Api2PdfResponse` that succesfully generated a pdf, you can use the handy `SavePdf(string localPdf)` method to download the pdf to a local cache.
