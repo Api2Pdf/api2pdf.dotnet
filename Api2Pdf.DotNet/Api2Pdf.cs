@@ -28,6 +28,7 @@ namespace Api2PdfLibrary
             public double Cost { get; set; }
             public bool Success { get; set; }
             public string Error { get; set; }
+            public string ResponseId { get; set; }
 
             public void SavePdf(string localPath)
             {
@@ -70,6 +71,11 @@ namespace Api2PdfLibrary
 
 
             return _httpClient.PostPdfRequest<Api2PdfResponse>($"{API_BASE_URL}/merge", mergeRequest);
+        }
+
+        public Api2PdfResponse Delete(string responseId)
+        {
+            return _httpClient.DeletePdfRequest<Api2PdfResponse>($"{API_BASE_URL}/pdf/{responseId}");
         }
     }
 
