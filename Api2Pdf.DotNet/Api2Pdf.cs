@@ -4,6 +4,7 @@ using System.Net.Http;
 using Api2PdfLibrary.Models;
 using Api2PdfLibrary.Extensions;
 using System.Linq;
+using System.Threading.Tasks;
 using static Api2PdfLibrary.Api2Pdf;
 
 namespace Api2PdfLibrary
@@ -17,6 +18,9 @@ namespace Api2PdfLibrary
         public LibreOfficeHandler LibreOffice;
         public HeadlessChromeHandler HeadlessChrome;
         public WkHtmlToPdfHandler WkHtmlToPdf;
+        
+        private static readonly string API_MERGE_URL = $"{API_BASE_URL}/merge";
+        private static readonly string API_DELETE_PDF_URL_BASE = $"{API_BASE_URL}/pdf/";
 
         
 
@@ -35,11 +39,24 @@ namespace Api2PdfLibrary
                 var wc = new System.Net.WebClient();
                 wc.DownloadFile(Pdf, localPath);
             }
+            
+            public Task SavePdfAsync(string localPath)
+            {
+                var wc = new System.Net.WebClient();
+                var uri = new Uri(Pdf);
+                return wc.DownloadFileTaskAsync(uri, localPath);
+            }
 
             public byte[] GetPdfBytes()
             {
                 var wc = new System.Net.WebClient();
                 return wc.DownloadData(Pdf);
+            }
+            
+            public Task<byte[]> GetPdfBytesAsync()
+            {
+                var wc = new System.Net.WebClient();
+                return wc.DownloadDataTaskAsync(Pdf);
             }
         }
 
@@ -70,18 +87,39 @@ namespace Api2PdfLibrary
             };
 
 
-            return _httpClient.PostPdfRequest<Api2PdfResponse>($"{API_BASE_URL}/merge", mergeRequest);
+            return _httpClient.PostPdfRequest<Api2PdfResponse>(API_MERGE_URL, mergeRequest);
         }
 
+        public Task<Api2PdfResponse> MergeAsync(IEnumerable<string> pdfUrls, bool inline = false, string outputFileName = null)
+        {
+            var mergeRequest = new MergeRequest
+            {
+                Urls = pdfUrls.ToArray(),
+                FileName = outputFileName,
+                InlinePdf = inline
+            };
+
+
+            return _httpClient.PostPdfRequestAsync<Api2PdfResponse>(API_MERGE_URL, mergeRequest);
+        }
+        
         public Api2PdfResponse Delete(string responseId)
         {
-            return _httpClient.DeletePdfRequest<Api2PdfResponse>($"{API_BASE_URL}/pdf/{responseId}");
+            return _httpClient.DeletePdfRequest<Api2PdfResponse>($"{API_DELETE_PDF_URL_BASE}{responseId}");
+        }
+        
+        public Task<Api2PdfResponse> DeleteAsync(string responseId)
+        {
+            return _httpClient.DeletePdfRequestAsync<Api2PdfResponse>($"{API_DELETE_PDF_URL_BASE}{responseId}");
         }
     }
 
     public class LibreOfficeHandler
     {
         private string _apiKey;
+
+        private static readonly string API_LIBRE_CONVERT_URL = $"{API_BASE_URL}/libreoffice/convert";
+        
         public LibreOfficeHandler(string apiKey)
         {
             _apiKey = apiKey;
@@ -89,26 +127,50 @@ namespace Api2PdfLibrary
 
         public Api2PdfResponse Convert(string url, bool inline = false, string outputFileName = null)
         {
+            var libreRequest = CreateLibreOfficeConvertRequest(url, inline, outputFileName);
+
+            return _httpClient.PostPdfRequest<Api2PdfResponse>(API_LIBRE_CONVERT_URL, libreRequest);
+        }
+
+        private static LibreOfficeConvertRequest CreateLibreOfficeConvertRequest(string url, bool inline, string outputFileName)
+        {
             var libreRequest = new LibreOfficeConvertRequest
             {
                 FileName = outputFileName,
                 InlinePdf = inline,
                 Url = url
             };
+            return libreRequest;
+        }
 
-            return _httpClient.PostPdfRequest<Api2PdfResponse>($"{API_BASE_URL}/libreoffice/convert", libreRequest);
+        public Task<Api2PdfResponse> ConvertAsync(string url, bool inline = false, string outputFileName = null)
+        {
+            var libreRequest = CreateLibreOfficeConvertRequest(url, inline, outputFileName);
+
+            return _httpClient.PostPdfRequestAsync<Api2PdfResponse>(API_LIBRE_CONVERT_URL, libreRequest);
         }
     }
 
     public class WkHtmlToPdfHandler
     {
         private string _apiKey;
+        private static readonly string API_WKHTML_HTML_URL = $"{API_BASE_URL}/wkhtmltopdf/html";
+        private static readonly string API_WKHTML_URL_URL = $"{API_BASE_URL}/wkhtmltopdf/url";
+        
         public WkHtmlToPdfHandler(string apiKey)
         {
             _apiKey = apiKey;
         }
 
         public Api2PdfResponse FromHtml(string html, bool inline = false, string outputFileName = null, Dictionary<string, string> options = null)
+        {
+            var wkRequest = CreateWkHtmlToPdfHtmlRequest(html, inline, outputFileName, options);
+
+            return _httpClient.PostPdfRequest<Api2PdfResponse>(API_WKHTML_HTML_URL, wkRequest);
+        }
+
+        private static WkHtmlToPdfHtmlRequest CreateWkHtmlToPdfHtmlRequest(string html, bool inline, string outputFileName,
+            Dictionary<string, string> options)
         {
             var wkRequest = new WkHtmlToPdfHtmlRequest
             {
@@ -118,16 +180,31 @@ namespace Api2PdfLibrary
                 Options = new Dictionary<string, string>()
             };
 
-            if(options != null)
+            if (options != null)
             {
                 foreach (var o in options)
                     wkRequest.Options[o.Key] = o.Value;
             }
 
-            return _httpClient.PostPdfRequest<Api2PdfResponse>($"{API_BASE_URL}/wkhtmltopdf/html", wkRequest);
+            return wkRequest;
+        }
+
+        public Task<Api2PdfResponse> FromHtmlAsync(string html, bool inline = false, string outputFileName = null, Dictionary<string, string> options = null)
+        {
+            var wkRequest = CreateWkHtmlToPdfHtmlRequest(html, inline, outputFileName, options);
+
+            return _httpClient.PostPdfRequestAsync<Api2PdfResponse>(API_WKHTML_HTML_URL, wkRequest);
         }
 
         public Api2PdfResponse FromUrl(string url, bool inline = false, string outputFileName = null, Dictionary<string, string> options = null)
+        {
+            var wkRequest = CreateWkHtmlToPdfUrlRequest(url, inline, outputFileName, options);
+
+            return _httpClient.PostPdfRequest<Api2PdfResponse>(API_WKHTML_URL_URL, wkRequest);
+        }
+
+        private static WkHtmlToPdfUrlRequest CreateWkHtmlToPdfUrlRequest(string url, bool inline, string outputFileName,
+            Dictionary<string, string> options)
         {
             var wkRequest = new WkHtmlToPdfUrlRequest
             {
@@ -143,19 +220,37 @@ namespace Api2PdfLibrary
                     wkRequest.Options[o.Key] = o.Value;
             }
 
-            return _httpClient.PostPdfRequest<Api2PdfResponse>($"{API_BASE_URL}/wkhtmltopdf/url", wkRequest);
+            return wkRequest;
+        }
+        
+        public Task<Api2PdfResponse> FromUrlAsync(string url, bool inline = false, string outputFileName = null, Dictionary<string, string> options = null)
+        {
+            var wkRequest = CreateWkHtmlToPdfUrlRequest(url, inline, outputFileName, options);
+
+            return _httpClient.PostPdfRequestAsync<Api2PdfResponse>(API_WKHTML_URL_URL, wkRequest);
         }
     }
 
     public class HeadlessChromeHandler
     {
         private string _apiKey;
+        private static readonly string API_CHROME_HTML_URL = $"{API_BASE_URL}/chrome/html";
+        private static readonly string API_CHROME_URL_URL = $"{API_BASE_URL}/chrome/url";
+
         public HeadlessChromeHandler(string apiKey)
         {
             _apiKey = apiKey;
         }
 
         public Api2PdfResponse FromHtml(string html, bool inline = false, string outputFileName = null, Dictionary<string, string> options = null)
+        {
+            var chromeRequest = CreateChromeHtmlRequest(html, inline, outputFileName, options);
+
+            return _httpClient.PostPdfRequest<Api2PdfResponse>($"{API_BASE_URL}/chrome/html", chromeRequest);
+        }
+
+        private static ChromeHtmlRequest CreateChromeHtmlRequest(string html, bool inline, string outputFileName,
+            Dictionary<string, string> options)
         {
             var chromeRequest = new ChromeHtmlRequest
             {
@@ -171,10 +266,25 @@ namespace Api2PdfLibrary
                     chromeRequest.Options[o.Key] = o.Value;
             }
 
-            return _httpClient.PostPdfRequest<Api2PdfResponse>($"{API_BASE_URL}/chrome/html", chromeRequest);
+            return chromeRequest;
+        }
+        
+        public Task<Api2PdfResponse> FromHtmlAsync(string html, bool inline = false, string outputFileName = null, Dictionary<string, string> options = null)
+        {
+            var chromeRequest = CreateChromeHtmlRequest(html, inline, outputFileName, options);
+
+            return _httpClient.PostPdfRequestAsync<Api2PdfResponse>(API_CHROME_HTML_URL, chromeRequest);
         }
 
         public Api2PdfResponse FromUrl(string url, bool inline = false, string outputFileName = null, Dictionary<string, string> options = null)
+        {
+            var chromeRequest = CreateChromeUrlRequest(url, inline, outputFileName, options);
+
+            return _httpClient.PostPdfRequest<Api2PdfResponse>(API_CHROME_URL_URL, chromeRequest);
+        }
+
+        private static ChromeUrlRequest CreateChromeUrlRequest(string url, bool inline, string outputFileName,
+            Dictionary<string, string> options)
         {
             var chromeRequest = new ChromeUrlRequest
             {
@@ -190,7 +300,15 @@ namespace Api2PdfLibrary
                     chromeRequest.Options[o.Key] = o.Value;
             }
 
-            return _httpClient.PostPdfRequest<Api2PdfResponse>($"{API_BASE_URL}/chrome/url", chromeRequest);
+            return chromeRequest;
         }
+        
+        public Task<Api2PdfResponse> FromUrlAsync(string url, bool inline = false, string outputFileName = null, Dictionary<string, string> options = null)
+        {
+            var chromeRequest = CreateChromeUrlRequest(url, inline, outputFileName, options);
+
+            return _httpClient.PostPdfRequestAsync<Api2PdfResponse>(API_CHROME_URL_URL, chromeRequest);
+        }
+
     }   
 }
