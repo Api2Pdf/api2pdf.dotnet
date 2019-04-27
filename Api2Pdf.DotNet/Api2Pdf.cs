@@ -79,18 +79,12 @@ namespace Api2PdfLibrary
 
         public Api2PdfResponse Merge(IEnumerable<string> pdfUrls, bool inline = false, string outputFileName = null)
         {
-            var mergeRequest = new MergeRequest
-            {
-                Urls = pdfUrls.ToArray(),
-                FileName = outputFileName,
-                InlinePdf = inline
-            };
-
+            var mergeRequest = CreateMergeRequest(pdfUrls, inline, outputFileName);
 
             return _httpClient.PostPdfRequest<Api2PdfResponse>(API_MERGE_URL, mergeRequest);
         }
 
-        public Task<Api2PdfResponse> MergeAsync(IEnumerable<string> pdfUrls, bool inline = false, string outputFileName = null)
+        private static MergeRequest CreateMergeRequest(IEnumerable<string> pdfUrls, bool inline, string outputFileName)
         {
             var mergeRequest = new MergeRequest
             {
@@ -98,7 +92,12 @@ namespace Api2PdfLibrary
                 FileName = outputFileName,
                 InlinePdf = inline
             };
+            return mergeRequest;
+        }
 
+        public Task<Api2PdfResponse> MergeAsync(IEnumerable<string> pdfUrls, bool inline = false, string outputFileName = null)
+        {
+            var mergeRequest = CreateMergeRequest(pdfUrls, inline, outputFileName);
 
             return _httpClient.PostPdfRequestAsync<Api2PdfResponse>(API_MERGE_URL, mergeRequest);
         }
