@@ -70,6 +70,7 @@ namespace Api2PdfLibrary
             if (_httpClient == null)
             {
                 _httpClient = new HttpClient();
+                _httpClient.Timeout = new TimeSpan(0, 20, 0);
                 _httpClient.DefaultRequestHeaders.Add("Authorization", apiKey);
 
                 if(!string.IsNullOrWhiteSpace(tag))
