@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api2Pdf.DotNet", "Api2Pdf.DotNet\Api2Pdf.DotNet.csproj", "{2E91CC9C-D07D-4C07-83A5-74C79EFC3D83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleApp", "ExampleApp\ExampleApp.csproj", "{05849817-58C8-4921-8B6B-EE747EE80D8B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api2Pdf.Examples", "Api2Pdf.Examples\Api2Pdf.Examples.csproj", "{D2721D2B-B64D-43FC-BC6F-177E5DED9735}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{2E91CC9C-D07D-4C07-83A5-74C79EFC3D83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E91CC9C-D07D-4C07-83A5-74C79EFC3D83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E91CC9C-D07D-4C07-83A5-74C79EFC3D83}.Release|Any CPU.Build.0 = Release|Any CPU
-		{05849817-58C8-4921-8B6B-EE747EE80D8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{05849817-58C8-4921-8B6B-EE747EE80D8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{05849817-58C8-4921-8B6B-EE747EE80D8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{05849817-58C8-4921-8B6B-EE747EE80D8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2721D2B-B64D-43FC-BC6F-177E5DED9735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2721D2B-B64D-43FC-BC6F-177E5DED9735}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2721D2B-B64D-43FC-BC6F-177E5DED9735}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2721D2B-B64D-43FC-BC6F-177E5DED9735}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
