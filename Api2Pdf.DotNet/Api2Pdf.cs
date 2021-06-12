@@ -327,6 +327,20 @@ namespace Api2Pdf
             return response;
         }
 
+        public Api2PdfResult Thumbnail(LibreFileConversionRequest request)
+        {
+            string route = "/thumbnail";
+            var response = MakeRequest(route, request);
+            return response;
+        }
+
+        public async Task<Api2PdfResult> ThumbnailAsync(LibreFileConversionRequest request)
+        {
+            string route = "/thumbnail";
+            var response = await MakeRequestAsync(route, request);
+            return response;
+        }
+
         public Api2PdfResult HtmlToDocx(LibreFileConversionRequest request)
         {
             string route = "/html-to-docx";
