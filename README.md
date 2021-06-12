@@ -184,9 +184,7 @@ An `Api2PdfResult` object is returned from every API call. If a call is unsucces
 
 ## <a name="libreoffice"></a>LibreOffice
 
-LibreOffice supports the conversion to PDF from the following file formats:
-
-- doc, docx, xls, xlsx, ppt, pptx, gif, jpg, png, bmp, rtf, txt, html
+Convert any office file to PDF, image file to PDF, email file to PDF, HTML to Word, HTML to Excel, and PDF to HTML. Any file that can be reasonably opened by LibreOffice should be convertible.
 
 You must provide a url to the file. Our engine will consume the file at that URL and convert it to the PDF.
 
