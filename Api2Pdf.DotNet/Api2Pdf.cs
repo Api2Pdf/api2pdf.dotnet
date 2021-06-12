@@ -465,13 +465,13 @@ namespace Api2Pdf
         [JsonIgnore]
         public byte[] ResultAsBytes { private get; set; }
 
-        public void SavePdf(string localPath)
+        public void SaveFile(string localPath)
         {
             var wc = new System.Net.WebClient();
             wc.DownloadFile(FileUrl, localPath);
         }
 
-        public byte[] GetPdfBytes()
+        public byte[] GetFileBytes()
         {
             if (ResultAsBytes != null)
                 return ResultAsBytes;
