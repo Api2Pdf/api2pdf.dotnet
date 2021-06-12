@@ -184,7 +184,7 @@ An `Api2PdfResult` object is returned from every API call. If a call is unsucces
 
 ## <a name="libreoffice"></a>LibreOffice
 
-Convert any office file to PDF, image file to PDF, email file to PDF, HTML to Word, HTML to Excel, and PDF to HTML. Any file that can be reasonably opened by LibreOffice should be convertible.
+Convert any office file to PDF, image file to PDF, email file to PDF, HTML to Word, HTML to Excel, and PDF to HTML. Any file that can be reasonably opened by LibreOffice should be convertible. Additionally, we have an endpoint for generating a *thumbnail* of the first page of your PDF or Office Document. This is great for generating an image preview of your files to users.
 
 You must provide a url to the file. Our engine will consume the file at that URL and convert it to the PDF.
 
@@ -195,6 +195,14 @@ You must provide a url to the file. Our engine will consume the file at that URL
         Url = "https://www.api2pdf.com/wp-content/themes/api2pdf/assets/samples/sample-word-doc.docx"
     }
     var apiResponse = a2pClient.LibreOffice.AnyToPdf(request);
+
+**Thumbnail or Image Preview of a PDF or Office Document or Email file**
+
+    var request = new LibreFileConversionRequest
+    {
+        Url = "https://www.api2pdf.com/wp-content/themes/api2pdf/assets/samples/sample-word-doc.docx"
+    }
+    var apiResponse = a2pClient.LibreOffice.Thumbnail(request);
 
 **Convert HTML to Microsoft Word or Docx**
 
