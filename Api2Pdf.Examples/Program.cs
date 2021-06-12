@@ -5,9 +5,15 @@ namespace Api2Pdf.Examples
 {
     class Program
     {
-        public const string API_KEY = "YOUR-API-KEY";
+        public const string API_KEY = "";
         static void Main(string[] args)
         {
+            if (string.IsNullOrEmpty(API_KEY))
+            {
+                Console.WriteLine("Set API Key variable before running script");
+                return;
+            }
+
             Console.WriteLine("Starting up...");
 
             var a2pClient = new Api2Pdf(API_KEY);
