@@ -179,6 +179,23 @@ An `Api2PdfResult` object is returned from every API call. If a call is unsucces
         Options = options
     };
     var apiResponse = a2pClient.Chrome.UrlToPdf(request);
+
+
+**Convert HTML to Image or HTML to PNG**
+
+    var request = new ChromeHtmlToImageRequest
+    {
+        Html = "<p>Hello World</p>"
+    };
+    var apiResponse = a2pClient.Chrome.HtmlToImage(request);
+
+**Convert URL to Image or URL to PNG**
+
+    var request = new ChromeUrlToImageRequest
+    {
+        Url = "https://www.api2pdf.com"
+    };
+    var apiResponse = a2pClient.Chrome.UrlToImage(request);
     
 ---
 

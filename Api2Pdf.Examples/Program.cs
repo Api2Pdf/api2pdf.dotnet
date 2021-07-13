@@ -62,6 +62,22 @@ namespace Api2Pdf.Examples
 
             Console.WriteLine($"Chrome URL to PDF: {result.FileUrl}");
 
+            //Chrome - HTML to Image
+            result = a2pClient.Chrome.HtmlToImage(new ChromeHtmlToImageRequest
+            {
+                Html = sampleHtml
+            });
+
+            Console.WriteLine($"Chrome HTML to Image: {result.FileUrl}");
+
+            //Chrome - URL to Image
+            result = a2pClient.Chrome.UrlToImage(new ChromeUrlToImageRequest
+            {
+                Url = "https://www.api2pdf.com"
+            });
+
+            Console.WriteLine($"Chrome Url to Image: {result.FileUrl}");
+
             //Wkhtml
 
             //Wkhtml - HTML to PDF
