@@ -81,7 +81,7 @@ An `Api2PdfResult` object is returned from every API call. If a call is unsucces
     };
     var apiResponse = a2pClient.Wkhtml.HtmlToPdf(request);
     
-**Convert HTML to PDF (use dictionary for advanced wkhtmltopdf settings)**
+**Convert HTML to PDF (advanced wkhtmltopdf settings)**
 [View full list of wkhtmltopdf options available.](https://www.api2pdf.com/documentation/advanced-options-wkhtmltopdf/)
 
     var options = new Dictionary<string, string>();
@@ -105,7 +105,7 @@ An `Api2PdfResult` object is returned from every API call. If a call is unsucces
     };
     var apiResponse = a2pClient.WkHtml.UrlToPdf(request);
     
-**Convert URL to PDF (use dictionary for advanced wkhtmltopdf settings)**
+**Convert URL to PDF (advanced wkhtmltopdf settings)**
 [View full list of wkhtmltopdf options available.](https://www.api2pdf.com/documentation/advanced-options-wkhtmltopdf/)
 
     var options = new Dictionary<string, string>();
@@ -134,7 +134,7 @@ An `Api2PdfResult` object is returned from every API call. If a call is unsucces
     };
     var apiResponse = a2pClient.Chrome.HtmlToPdf(request);
     
-**Convert HTML to PDF (use dictionary for advanced Headless Chrome settings)**
+**Convert HTML to PDF (advanced Headless Chrome settings)**
 [View full list of Headless Chrome options available.](https://www.api2pdf.com/documentation/advanced-options-headless-chrome/)
 
     var options = new ChromeHtmlToPdfOptions
@@ -161,7 +161,7 @@ An `Api2PdfResult` object is returned from every API call. If a call is unsucces
     };
     var apiResponse = a2pClient.Chrome.UrlToPdf(request);
     
-**Convert URL to PDF (use dictionary for advanced Headless Chrome settings)**
+**Convert URL to PDF (advanced Headless Chrome settings)**
 [View full list of Headless Chrome options available.](https://www.api2pdf.com/documentation/advanced-options-headless-chrome/)
 
     var options = new ChromeUrlToPdfOptions
