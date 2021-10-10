@@ -14,7 +14,7 @@
     <Description>
       This client library is a wrapper for the Api2Pdf.com REST API. See full REST api documentation at https://www.api2pdf.com/documentation/v2. Api2Pdf is a powerful API that supports HTML to PDF, URL to PDF, HTML to Image, URL to Image, Thumbnail / image preview of an Office file, Office files (Word to PDF), HTML to Docx, HTML to excel, PDF to HTML, merge PDFs together, add bookmarks to PDFs, add passwords to PDFs
     </Description>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

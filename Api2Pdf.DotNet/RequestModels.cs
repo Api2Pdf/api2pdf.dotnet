@@ -83,6 +83,7 @@ namespace Api2Pdf
         public bool Landscape { get; set; } = false;
         public bool DisplayHeaderFooter { get; set; } = false;
         public bool PrintBackground { get; set; } = true;
+        public bool OmitBackground { get; set; } = false;
         public decimal Scale { get; set; } = 1.0m;
 
         private string _width = "8.27in";
