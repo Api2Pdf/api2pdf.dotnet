@@ -290,6 +290,18 @@ To use the merge endpoint, supply a list of urls to existing PDFs. The engine wi
         UserPassword = "password"
     };
     var apiResponse = a2pClient.PdfSharp.SetPassword(request);
+
+**Extract pages out of an existing PDF**
+
+[More details here](https://www.api2pdf.com/extract-pages-out-of-a-pdf-with-rest-api/)
+
+    var request = new PdfExtractPagesRequest
+    {
+        Url = "https://LINK-TO-PDF",
+        Start = 0,
+        End = 0
+    };
+    var apiResponse = a2pClient.PdfSharp.ExtractPages(request);
     
 ---
     

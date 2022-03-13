@@ -293,5 +293,11 @@ namespace Api2Pdf
         public string OwnerPassword { get; set; }
     }
 
+    public class PdfExtractPagesRequest : UrlRequest
+    {
+        public int Start { get; set; } = 0;
+        public int End { get; set; } = 0;
+    }
+
     #endregion
 }

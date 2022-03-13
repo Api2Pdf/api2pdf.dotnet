@@ -330,3 +330,4 @@ ASALocalRun/
 .mfractor/
 
 Api2Pdf.DotNet/Test.cs
+.vscode/

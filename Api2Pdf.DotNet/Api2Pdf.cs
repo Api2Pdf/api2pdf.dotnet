@@ -48,6 +48,8 @@ namespace Api2Pdf
         Task<Api2PdfResult> SetBookmarksAsync(PdfBookmarkRequest request);
         Api2PdfResult SetPassword(PdfPasswordRequest request);
         Task<Api2PdfResult> SetPasswordAsync(PdfPasswordRequest request);
+        Api2PdfResult ExtractPages(PdfExtractPagesRequest request);
+        Task<Api2PdfResult> ExtractPagesAsync(PdfExtractPagesRequest request);
 
     }
 
@@ -433,6 +435,20 @@ namespace Api2Pdf
         public async Task<Api2PdfResult> SetPasswordAsync(PdfPasswordRequest request)
         {
             string route = "/password";
+            var response = await MakeRequestAsync(route, request);
+            return response;
+        }
+
+        public Api2PdfResult ExtractPages(PdfExtractPagesRequest request)
+        {
+            string route = "/extract-pages";
+            var response = MakeRequest(route, request);
+            return response;
+        }
+
+        public async Task<Api2PdfResult> ExtractPagesAsync(PdfExtractPagesRequest request)
+        {
+            string route = "/extract-pages";
             var response = await MakeRequestAsync(route, request);
             return response;
         }

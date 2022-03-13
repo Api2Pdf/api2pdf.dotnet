@@ -25,6 +25,7 @@ namespace Api2Pdf.Examples
             string sampleHtmlFile = "http://www.api2pdf.com/wp-content/uploads/2021/01/sampleHtml.html";
             string sampleHtmlToXlsxFile = "http://www.api2pdf.com/wp-content/uploads/2021/01/sampleTables.html";
             string samplePdf = "http://www.api2pdf.com/wp-content/uploads/2021/01/1a082b03-2bd6-4703-989d-0443a88e3b0f-4.pdf";
+            string sampleLongPdf = "http://www.api2pdf.com/wp-content/uploads/2022/03/7b66d080-3120-477a-a213-87938b1b0c08.pdf";
 
             Api2PdfResult result;
 
@@ -188,6 +189,16 @@ namespace Api2Pdf.Examples
             });
 
             Console.WriteLine($"PdfSharp - set password: {result.FileUrl}");
+
+            //PdfSharp - extract pages
+            result = a2pClient.PdfSharp.ExtractPages(new PdfExtractPagesRequest
+            {
+                Url = sampleLongPdf,
+                Start = 0,
+                End = 2
+            });
+
+            Console.WriteLine($"PdfSharp - extract pages: {result.FileUrl}");
 
             //Delete PDF
             result = a2pClient.Chrome.HtmlToPdf(new ChromeHtmlToPdfRequest
