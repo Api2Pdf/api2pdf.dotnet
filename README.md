@@ -14,7 +14,7 @@ Api2Pdf.com is a powerful REST API for instantly generating PDF and Office docum
 
 ### nuget
 
-Run the nuget command for installing the client `Install-Package Api2Pdf -Version 2.0.0`
+Run the nuget command for installing the client `Install-Package Api2Pdf -Version 2.0.1`
 
 ## <a name="resources"></a>Resources
 
