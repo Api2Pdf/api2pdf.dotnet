@@ -122,6 +122,14 @@ namespace Api2Pdf.Examples
 
             Console.WriteLine($"LibreOffice Docx to PDF: {result.FileUrl}");
 
+            //LibreOffice - Thumbnail to PDF
+            result = a2pClient.LibreOffice.Thumbnail(new LibreFileConversionRequest
+            {
+                Url = sampleDocxFile
+            });
+
+            Console.WriteLine($"LibreOffice Thumbnail: {result.FileUrl}");
+
             //LibreOffice - Html to Docx
             result = a2pClient.LibreOffice.HtmlToDocx(new LibreFileConversionRequest
             {

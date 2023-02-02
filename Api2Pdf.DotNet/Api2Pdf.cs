@@ -32,6 +32,8 @@ namespace Api2Pdf
     {
         Api2PdfResult AnyToPdf(LibreFileConversionRequest request);
         Task<Api2PdfResult> AnyToPdfAsync(LibreFileConversionRequest request);
+        Api2PdfResult Thumbnail(LibreFileConversionRequest request);
+        Task<Api2PdfResult> ThumbnailAsync(LibreFileConversionRequest request);
         Api2PdfResult PdfToHtml(LibreFileConversionRequest request);
         Task<Api2PdfResult> PdfToHtmlAsync(LibreFileConversionRequest request);
         Api2PdfResult HtmlToDocx(LibreFileConversionRequest request);
