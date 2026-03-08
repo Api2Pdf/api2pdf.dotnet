@@ -1,6 +1,5 @@
-﻿using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Api2Pdf
 {
@@ -11,6 +10,9 @@ namespace Api2Pdf
         public bool Inline { get; set; } = true;
         public bool UseCustomStorage { get; set; } = false;
         public CustomStorageOptions Storage { get; set; }
+
+        [JsonIgnore]
+        public bool? OutputBinary { get; set; }
     }
 
     public class CustomStorageOptions
@@ -25,10 +27,30 @@ namespace Api2Pdf
         public string Html { get; set; }
     }
 
+    public abstract class MarkdownRequest : ConversionRequest
+    {
+        public string Markdown { get; set; }
+    }
+
     public abstract class UrlRequest : ConversionRequest
     {
         public string Url { get; set; }
         public Dictionary<string, string> ExtraHTTPHeaders { get; set; }
+    }
+
+    public abstract class HtmlOrUrlRequest : UrlRequest
+    {
+        public string Html { get; set; }
+    }
+
+    public class ViewPortOptions
+    {
+        public int Width { get; set; } = 1920;
+        public int Height { get; set; } = 1080;
+        public bool IsMobile { get; set; } = false;
+        public decimal DeviceScaleFactor { get; set; } = 1.0m;
+        public bool IsLandscape { get; set; } = false;
+        public bool HasTouch { get; set; } = false;
     }
 
     #endregion
@@ -44,6 +66,11 @@ namespace Api2Pdf
         public ChromeHtmlToPdfOptions Options { get; set; } = new ChromeHtmlToPdfOptions();
     }
 
+    public class ChromeMarkdownToPdfRequest : MarkdownRequest
+    {
+        public ChromeHtmlToPdfOptions Options { get; set; } = new ChromeHtmlToPdfOptions();
+    }
+
     public class ChromeUrlToImageRequest : UrlRequest
     {
         public ChromeUrlToImageOptions Options { get; set; } = new ChromeUrlToImageOptions();
@@ -54,12 +81,20 @@ namespace Api2Pdf
         public ChromeHtmlToImageOptions Options { get; set; } = new ChromeHtmlToImageOptions();
     }
 
+    public class ChromeMarkdownToImageRequest : MarkdownRequest
+    {
+        public ChromeHtmlToImageOptions Options { get; set; } = new ChromeHtmlToImageOptions();
+    }
+
 
     public abstract class ChromeImageOptions
     {
         public int Delay { get; set; } = 0;
 
         public bool FullPage { get; set; } = true;
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public ViewPortOptions ViewPortOptions { get; set; }
     }
 
     public class ChromeUrlToImageOptions : ChromeImageOptions
@@ -85,6 +120,9 @@ namespace Api2Pdf
         public bool PrintBackground { get; set; } = true;
         public bool OmitBackground { get; set; } = false;
         public decimal Scale { get; set; } = 1.0m;
+        public bool PreferCSSPageSize { get; set; } = false;
+        public bool Tagged { get; set; } = true;
+        public bool Outline { get; set; } = false;
 
         private string _width = "8.27in";
         public string Width
@@ -263,7 +301,26 @@ namespace Api2Pdf
 
     public class LibreFileConversionRequest : UrlRequest
     {
+    }
 
+    public class LibreHtmlOrUrlConversionRequest : HtmlOrUrlRequest
+    {
+    }
+
+    #endregion
+
+    #region Markitdown
+
+    public class MarkitdownRequest : UrlRequest
+    {
+    }
+
+    #endregion
+
+    #region OpenDataLoader
+
+    public class OpenDataLoaderRequest : UrlRequest
+    {
     }
 
     #endregion
@@ -276,17 +333,6 @@ namespace Api2Pdf
         public Dictionary<string, string> ExtraHTTPHeaders { get; set; } = new Dictionary<string, string>();
     }
 
-    public class PdfBookmarkRequest : UrlRequest
-    {
-        public IEnumerable<PdfBookmark> Bookmarks { get; set; }
-    }
-
-    public class PdfBookmark
-    {
-        public string Title { get; set; }
-        public int Page { get; set; }
-    }
-
     public class PdfPasswordRequest : UrlRequest
     {
         public string UserPassword { get; set; }
@@ -297,6 +343,38 @@ namespace Api2Pdf
     {
         public int Start { get; set; } = 0;
         public int End { get; set; } = 0;
+    }
+
+    #endregion
+
+    #region Zip
+
+    public class ZipRequest : ConversionRequest
+    {
+        public Dictionary<string, string> ExtraHTTPHeaders { get; set; } = new Dictionary<string, string>();
+        public IEnumerable<ZipFileInfo> Files { get; set; } = new List<ZipFileInfo>();
+    }
+
+    public class ZipFileInfo
+    {
+        public string Url { get; set; }
+        public string FileName { get; set; }
+    }
+
+    #endregion
+
+    #region Zebra
+
+    public class ZebraRequest
+    {
+        public string Format { get; set; }
+        public string Value { get; set; }
+        public int Height { get; set; } = 0;
+        public int Width { get; set; } = 0;
+        public bool ShowLabel { get; set; } = false;
+
+        [JsonIgnore]
+        public bool? OutputBinary { get; set; }
     }
 
     #endregion

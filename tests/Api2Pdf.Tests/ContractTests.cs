@@ -17,6 +17,10 @@ public class PublicContractTests
         Assert.IsType<global::Api2Pdf.Wkhtml>(client.Wkhtml);
         Assert.IsType<global::Api2Pdf.LibreOffice>(client.LibreOffice);
         Assert.IsType<global::Api2Pdf.PdfSharp>(client.PdfSharp);
+        Assert.IsType<global::Api2Pdf.Markitdown>(client.Markitdown);
+        Assert.IsType<global::Api2Pdf.OpenDataLoader>(client.OpenDataLoader);
+        Assert.IsType<global::Api2Pdf.Zip>(client.Zip);
+        Assert.IsType<global::Api2Pdf.Zebra>(client.Zebra);
         Assert.IsType<global::Api2Pdf.Api2PdfUtility>(client.Utilities);
     }
 
@@ -30,21 +34,42 @@ public class PublicContractTests
         Assert.NotNull(assembly.GetType("Api2Pdf.Wkhtml"));
         Assert.NotNull(assembly.GetType("Api2Pdf.LibreOffice"));
         Assert.NotNull(assembly.GetType("Api2Pdf.PdfSharp"));
+        Assert.NotNull(assembly.GetType("Api2Pdf.Markitdown"));
+        Assert.NotNull(assembly.GetType("Api2Pdf.OpenDataLoader"));
+        Assert.NotNull(assembly.GetType("Api2Pdf.Zip"));
+        Assert.NotNull(assembly.GetType("Api2Pdf.Zebra"));
+        Assert.NotNull(assembly.GetType("Api2Pdf.Api2PdfBaseUrls"));
         Assert.NotNull(assembly.GetType("Api2Pdf.Api2PdfResult"));
 
         AssertHasMethod<global::Api2Pdf.Chrome>("HtmlToPdf", typeof(global::Api2Pdf.ChromeHtmlToPdfRequest));
         AssertHasMethod<global::Api2Pdf.Chrome>("UrlToPdf", typeof(global::Api2Pdf.ChromeUrlToPdfRequest));
+        AssertHasMethod<global::Api2Pdf.Chrome>("UrlToPdf", typeof(string), typeof(bool?));
+        AssertHasMethod<global::Api2Pdf.Chrome>("MarkdownToPdf", typeof(global::Api2Pdf.ChromeMarkdownToPdfRequest));
         AssertHasMethod<global::Api2Pdf.Chrome>("HtmlToImage", typeof(global::Api2Pdf.ChromeHtmlToImageRequest));
         AssertHasMethod<global::Api2Pdf.Chrome>("UrlToImage", typeof(global::Api2Pdf.ChromeUrlToImageRequest));
+        AssertHasMethod<global::Api2Pdf.Chrome>("UrlToImage", typeof(string), typeof(bool?));
+        AssertHasMethod<global::Api2Pdf.Chrome>("MarkdownToImage", typeof(global::Api2Pdf.ChromeMarkdownToImageRequest));
         AssertHasMethod<global::Api2Pdf.Wkhtml>("HtmlToPdf", typeof(global::Api2Pdf.WkhtmlHtmlToPdfRequest));
         AssertHasMethod<global::Api2Pdf.Wkhtml>("UrlToPdf", typeof(global::Api2Pdf.WkhtmlUrlToPdfRequest));
+        AssertHasMethod<global::Api2Pdf.Wkhtml>("UrlToPdf", typeof(string), typeof(bool?));
         AssertHasMethod<global::Api2Pdf.LibreOffice>("AnyToPdf", typeof(global::Api2Pdf.LibreFileConversionRequest));
         AssertHasMethod<global::Api2Pdf.LibreOffice>("Thumbnail", typeof(global::Api2Pdf.LibreFileConversionRequest));
-        AssertHasMethod<global::Api2Pdf.LibreOffice>("PdfToHtml", typeof(global::Api2Pdf.LibreFileConversionRequest));
+        AssertHasMethod<global::Api2Pdf.LibreOffice>("HtmlToDocx", typeof(global::Api2Pdf.LibreHtmlOrUrlConversionRequest));
+        AssertHasMethod<global::Api2Pdf.LibreOffice>("HtmlToXlsx", typeof(global::Api2Pdf.LibreHtmlOrUrlConversionRequest));
         AssertHasMethod<global::Api2Pdf.PdfSharp>("MergePdfs", typeof(global::Api2Pdf.PdfMergeRequest));
-        AssertHasMethod<global::Api2Pdf.PdfSharp>("SetBookmarks", typeof(global::Api2Pdf.PdfBookmarkRequest));
         AssertHasMethod<global::Api2Pdf.PdfSharp>("SetPassword", typeof(global::Api2Pdf.PdfPasswordRequest));
         AssertHasMethod<global::Api2Pdf.PdfSharp>("ExtractPages", typeof(global::Api2Pdf.PdfExtractPagesRequest));
+        AssertHasMethod<global::Api2Pdf.Markitdown>("ConvertToMarkdown", typeof(global::Api2Pdf.MarkitdownRequest));
+        AssertHasMethod<global::Api2Pdf.OpenDataLoader>("PdfToJson", typeof(global::Api2Pdf.OpenDataLoaderRequest));
+        AssertHasMethod<global::Api2Pdf.OpenDataLoader>("PdfToMarkdown", typeof(global::Api2Pdf.OpenDataLoaderRequest));
+        AssertHasMethod<global::Api2Pdf.OpenDataLoader>("PdfToHtml", typeof(global::Api2Pdf.OpenDataLoaderRequest));
+        AssertHasMethod<global::Api2Pdf.Zip>("GenerateZip", typeof(global::Api2Pdf.ZipRequest));
+        AssertHasMethod<global::Api2Pdf.Zebra>("GenerateBarcode", typeof(global::Api2Pdf.ZebraRequest));
+        AssertHasMethod<global::Api2Pdf.Api2PdfUtility>("Status");
+        AssertHasMethod<global::Api2Pdf.Api2PdfUtility>("Balance");
+
+        AssertDoesNotHaveMethod<global::Api2Pdf.LibreOffice>("PdfToHtml", typeof(global::Api2Pdf.LibreFileConversionRequest));
+        AssertDoesNotHaveMethod<global::Api2Pdf.PdfSharp>("SetBookmarks");
     }
 
     [Fact]
@@ -54,16 +79,50 @@ public class PublicContractTests
         var wkhtml = new InspectableWkhtml("test-api-key");
         var libre = new InspectableLibreOffice("test-api-key");
         var pdfSharp = new InspectablePdfSharp("test-api-key");
+        var markitdown = new InspectableMarkitdown("test-api-key");
+        var openDataLoader = new InspectableOpenDataLoader("test-api-key");
+        var zip = new InspectableZip("test-api-key");
+        var zebra = new InspectableZebra("test-api-key");
+        var utility = new InspectableUtility("test-api-key");
 
         Assert.Equal("https://v2.api2pdf.com/chrome", chrome.BaseUrl);
         Assert.Equal("https://v2.api2pdf.com/wkhtml", wkhtml.BaseUrl);
         Assert.Equal("https://v2.api2pdf.com/libreoffice", libre.BaseUrl);
         Assert.Equal("https://v2.api2pdf.com/pdfsharp", pdfSharp.BaseUrl);
+        Assert.Equal("https://v2.api2pdf.com/markitdown", markitdown.BaseUrl);
+        Assert.Equal("https://v2.api2pdf.com/opendataloader", openDataLoader.BaseUrl);
+        Assert.Equal("https://v2.api2pdf.com/zip", zip.BaseUrl);
+        Assert.Equal("https://v2.api2pdf.com/zebra", zebra.BaseUrl);
+        Assert.Equal("https://v2.api2pdf.com", utility.BaseUrl);
 
         Assert.Equal("test-api-key", chrome.Headers["Authorization"]);
         Assert.Equal("test-api-key", wkhtml.Headers["Authorization"]);
         Assert.Equal("test-api-key", libre.Headers["Authorization"]);
         Assert.Equal("test-api-key", pdfSharp.Headers["Authorization"]);
+        Assert.Equal("test-api-key", markitdown.Headers["Authorization"]);
+        Assert.Equal("test-api-key", openDataLoader.Headers["Authorization"]);
+        Assert.Equal("test-api-key", zip.Headers["Authorization"]);
+        Assert.Equal("test-api-key", zebra.Headers["Authorization"]);
+        Assert.Equal("test-api-key", utility.Headers["Authorization"]);
+    }
+
+    [Fact]
+    public void Base_domain_constructor_appends_service_paths_and_supports_v2_xl()
+    {
+        var headers = new Dictionary<string, string>
+        {
+            ["X-Custom"] = "header-value"
+        };
+
+        var chrome = new InspectableChrome("test-api-key", global::Api2Pdf.Api2PdfBaseUrls.V2Xl, headers);
+        var utility = new InspectableUtility("test-api-key", "https://example.test", headers);
+
+        Assert.Equal("https://v2-xl.api2pdf.com/chrome", chrome.BaseUrl);
+        Assert.Equal("https://example.test", utility.BaseUrl);
+        Assert.Equal("test-api-key", chrome.Headers["Authorization"]);
+        Assert.Equal("header-value", chrome.Headers["X-Custom"]);
+        Assert.Equal("test-api-key", utility.Headers["Authorization"]);
+        Assert.Equal("header-value", utility.Headers["X-Custom"]);
     }
 
     [Fact]
@@ -86,24 +145,39 @@ public class PublicContractTests
     {
         var chromeHtml = new global::Api2Pdf.ChromeHtmlToPdfRequest();
         var chromeUrl = new global::Api2Pdf.ChromeUrlToImageRequest();
+        var chromeMarkdown = new global::Api2Pdf.ChromeMarkdownToPdfRequest();
         var wkhtmlHtml = new global::Api2Pdf.WkhtmlHtmlToPdfRequest();
         var wkhtmlUrl = new global::Api2Pdf.WkhtmlUrlToPdfRequest();
+        var libreHtmlOrUrl = new global::Api2Pdf.LibreHtmlOrUrlConversionRequest();
+        var markitdown = new global::Api2Pdf.MarkitdownRequest();
+        var openDataLoader = new global::Api2Pdf.OpenDataLoaderRequest();
         var merge = new global::Api2Pdf.PdfMergeRequest();
         var extract = new global::Api2Pdf.PdfExtractPagesRequest();
+        var zip = new global::Api2Pdf.ZipRequest();
+        var zebra = new global::Api2Pdf.ZebraRequest();
 
         Assert.True(chromeHtml.Inline);
         Assert.False(chromeHtml.UseCustomStorage);
         Assert.NotNull(chromeHtml.Options);
         Assert.NotNull(chromeUrl.Options);
+        Assert.NotNull(chromeMarkdown.Options);
         Assert.NotNull(wkhtmlHtml.Options);
         Assert.NotNull(wkhtmlHtml.TocOptions);
         Assert.False(wkhtmlHtml.EnableToc);
         Assert.NotNull(wkhtmlUrl.Options);
         Assert.NotNull(wkhtmlUrl.TocOptions);
         Assert.False(wkhtmlUrl.EnableToc);
+        Assert.Null(libreHtmlOrUrl.OutputBinary);
+        Assert.Null(markitdown.OutputBinary);
+        Assert.Null(openDataLoader.OutputBinary);
         Assert.NotNull(merge.ExtraHTTPHeaders);
         Assert.Equal(0, extract.Start);
         Assert.Equal(0, extract.End);
+        Assert.NotNull(zip.Files);
+        Assert.NotNull(zip.ExtraHTTPHeaders);
+        Assert.Equal(0, zebra.Height);
+        Assert.Equal(0, zebra.Width);
+        Assert.False(zebra.ShowLabel);
     }
 
     [Fact]
@@ -117,6 +191,9 @@ public class PublicContractTests
         Assert.Equal(".4in", options.MarginBottom);
         Assert.Equal(".4in", options.MarginLeft);
         Assert.Equal(".4in", options.MarginRight);
+        Assert.False(options.PreferCSSPageSize);
+        Assert.True(options.Tagged);
+        Assert.False(options.Outline);
 
         options.Width = "8.5";
         options.Height = "11";
@@ -140,7 +217,8 @@ public class PublicContractTests
     {
         var request = new global::Api2Pdf.ChromeHtmlToPdfRequest
         {
-            Html = "<p>Hello World</p>"
+            Html = "<p>Hello World</p>",
+            OutputBinary = true
         };
 
         var json = JsonConvert.SerializeObject(request);
@@ -151,6 +229,7 @@ public class PublicContractTests
         Assert.Contains("\"Options\":", json);
         Assert.Contains("\"Delay\":0", json);
         Assert.Contains("\"UsePrintCss\":true", json);
+        Assert.DoesNotContain("OutputBinary", json);
     }
 
     [Fact]
@@ -173,9 +252,19 @@ public class PublicContractTests
         Assert.NotNull(method);
     }
 
+    private static void AssertDoesNotHaveMethod<T>(string methodName, params Type[] parameterTypes)
+    {
+        var method = typeof(T).GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public, null, parameterTypes, null);
+        Assert.Null(method);
+    }
+
     private sealed class InspectableChrome : global::Api2Pdf.Chrome
     {
         public InspectableChrome(string apiKey) : base(apiKey)
+        {
+        }
+
+        public InspectableChrome(string apiKey, string baseUrl, Dictionary<string, string> headers) : base(apiKey, baseUrl, headers)
         {
         }
 
@@ -213,6 +302,65 @@ public class PublicContractTests
     private sealed class InspectablePdfSharp : global::Api2Pdf.PdfSharp
     {
         public InspectablePdfSharp(string apiKey) : base(apiKey)
+        {
+        }
+
+        public string BaseUrl => _baseUrl;
+
+        public Dictionary<string, string> Headers => _httpHeaders;
+    }
+
+    private sealed class InspectableMarkitdown : global::Api2Pdf.Markitdown
+    {
+        public InspectableMarkitdown(string apiKey) : base(apiKey)
+        {
+        }
+
+        public string BaseUrl => _baseUrl;
+
+        public Dictionary<string, string> Headers => _httpHeaders;
+    }
+
+    private sealed class InspectableOpenDataLoader : global::Api2Pdf.OpenDataLoader
+    {
+        public InspectableOpenDataLoader(string apiKey) : base(apiKey)
+        {
+        }
+
+        public string BaseUrl => _baseUrl;
+
+        public Dictionary<string, string> Headers => _httpHeaders;
+    }
+
+    private sealed class InspectableZip : global::Api2Pdf.Zip
+    {
+        public InspectableZip(string apiKey) : base(apiKey)
+        {
+        }
+
+        public string BaseUrl => _baseUrl;
+
+        public Dictionary<string, string> Headers => _httpHeaders;
+    }
+
+    private sealed class InspectableZebra : global::Api2Pdf.Zebra
+    {
+        public InspectableZebra(string apiKey) : base(apiKey)
+        {
+        }
+
+        public string BaseUrl => _baseUrl;
+
+        public Dictionary<string, string> Headers => _httpHeaders;
+    }
+
+    private sealed class InspectableUtility : global::Api2Pdf.Api2PdfUtility
+    {
+        public InspectableUtility(string apiKey) : base(apiKey)
+        {
+        }
+
+        public InspectableUtility(string apiKey, string baseUrl, Dictionary<string, string> headers) : base(apiKey, baseUrl, headers)
         {
         }
 
