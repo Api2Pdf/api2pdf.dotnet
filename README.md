@@ -13,7 +13,7 @@ dotnet add package Api2Pdf
 ```
 
 ```powershell
-Install-Package Api2Pdf -Version 2.1.1
+Install-Package Api2Pdf -Version 2.2.0
 ```
 
 ## Quick Start
