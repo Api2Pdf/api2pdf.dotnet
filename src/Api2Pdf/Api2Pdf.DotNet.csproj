@@ -12,11 +12,11 @@
     <PackageProjectUrl>https://github.com/Api2Pdf/api2pdf.dotnet/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Api2Pdf/api2pdf.dotnet/</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>pdf wkhtmtopdf headless chrome libreoffice</PackageTags>
+    <PackageTags>pdf wkhtmltopdf headless-chrome libreoffice html-to-pdf url-to-pdf html-to-image url-to-image markdown pdf-extraction barcode zip dotnet</PackageTags>
     <Description>
-      This client library is a wrapper for the Api2Pdf.com REST API. See full REST api documentation at https://www.api2pdf.com/documentation/v2. Api2Pdf is a powerful API that supports HTML to PDF, URL to PDF, HTML to Image, URL to Image, Thumbnail / image preview of an Office file, Office files (Word to PDF), HTML to Docx, HTML to excel, PDF to HTML, merge PDFs together, add bookmarks to PDFs, add passwords to PDFs, extract pages out of a PDF
+      .NET client library for the Api2Pdf.com REST API. Supports HTML to PDF, URL to PDF, HTML to image, URL to image, Office document conversion, thumbnails, markdown conversion, PDF data extraction, PDF merge, PDF password protection, barcode generation, zip creation, custom storage, and alternate Api2Pdf domains. Documentation: https://v2.api2pdf.com
     </Description>
-    <Version>2.1.1</Version>
+    <Version>2.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
