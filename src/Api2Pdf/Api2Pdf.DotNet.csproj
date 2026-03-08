@@ -2,14 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageId>Api2Pdf</PackageId>
     <Authors>Api2Pdf</Authors>
     <Company>Api2Pdf</Company>
     <Product>Api2Pdf</Product>
-    <PackageLicenseUrl>https://github.com/Api2Pdf/api2pdf.dotnet/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/Api2Pdf/api2pdf.dotnet/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Api2Pdf/api2pdf.dotnet/</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <PackageTags>pdf wkhtmtopdf headless chrome libreoffice</PackageTags>
     <Description>
       This client library is a wrapper for the Api2Pdf.com REST API. See full REST api documentation at https://www.api2pdf.com/documentation/v2. Api2Pdf is a powerful API that supports HTML to PDF, URL to PDF, HTML to Image, URL to Image, Thumbnail / image preview of an Office file, Office files (Word to PDF), HTML to Docx, HTML to excel, PDF to HTML, merge PDFs together, add bookmarks to PDFs, add passwords to PDFs, extract pages out of a PDF
@@ -18,7 +20,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
